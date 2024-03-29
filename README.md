@@ -8,4 +8,4 @@ This repository contains a shopping website built using MERN stack
   3 Interactive Cart
   4 CheckOut
 
-> [Working Demo] (https://fair-teal-penguin-toga.cyclic.app/login)
+> [Working Demo] (https://fair-teal-penguin-toga.cyclic.app/)
