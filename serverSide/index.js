@@ -73,3 +73,14 @@ const server = app.listen(process.env.PORT, () => {
     `Server started on PORT: ${process.env.PORT} in ${process.env.NODE_ENV} mode.`
   );
 });
+
+const mongoConnectionString = process.env.DB_URI;
+if (
+  !mongoConnectionString.startsWith("mongodb://") &&
+  !mongoConnectionString.startsWith("mongodb+srv://")
+) {
+  console.error(
+    "Invalid MongoDB connection string. Please ensure it starts with 'mongodb://' or 'mongodb+srv://'."
+  );
+  process.exit(1);
+}
