@@ -72,7 +72,7 @@ const server = app.listen(process.env.PORT, () => {
   console.log(
     `Server started on PORT: ${process.env.PORT} in ${process.env.NODE_ENV} mode.`
   );
-});
 
-console.log(server);
+  console.log(process.env.DB_URI);
+});
 
