@@ -35,7 +35,14 @@ if(process.env.NODE_ENV !== "PRODUCTION") {
 
 //connecting to db
 
-connectDatabase();
+connectDatabase()
+
+.then(() => {
+  console.log("Connected to MongoDB");
+})
+.catch((error) => {
+  console.error("Error connecting to MongoDB:", error);
+});
 
 
 app.use(express.json( {
