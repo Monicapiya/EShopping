@@ -15,17 +15,17 @@ process.on("unhandledRejection", (err) => {
 });
 
 // Import necessary modules
-import express from 'express';
+import express from "express";
 import dotenv from "dotenv";
 import middlewareErrors from "./middlewares/errors.js";
 import productRoutes from "./routes/products.js";
 import authRoutes from "./routes/autho.js";
-import { connectDatabase } from './config/dbConnect.js';
+import { connectDatabase } from "./config/dbConnect.js";
 import cookieParser from "cookie-parser";
 import orderRoutes from "./routes/order.js";
-import cors  from "cors";
+import cors from "cors";
 import path from "path";
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from "url";
 
 const app = express();
 app.use(cors());
@@ -33,8 +33,8 @@ app.use(cors());
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = path.dirname(_filename);
 
-if(process.env.NODE_ENV !== "PRODUCTION") {
-  dotenv.config({path: "serverSide/config/config.env"});
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  dotenv.config({ path: "serverSide/config/config.env" });
 }
 
 // Connecting to db
@@ -46,12 +46,14 @@ try {
   process.exit(1); // Exit the process if unable to connect to MongoDB
 }
 
-app.use(express.json({
-  limit: "10mb",
-  verify: (req, res, buf) => {
-    req.rawBody = buf.toString();
-  }
-}));
+app.use(
+  express.json({
+    limit: "10mb",
+    verify: (req, res, buf) => {
+      req.rawBody = buf.toString();
+    },
+  })
+);
 app.use(cookieParser());
 
 app.use("/api/v1", productRoutes);
@@ -67,5 +69,7 @@ if (process.env.NODE_ENV === "PRODUCTION") {
 }
 
 const server = app.listen(process.env.PORT, () => {
-  console.log(`Server started on PORT: ${process.env.PORT} in ${process.env.NODE_ENV} mode.`);
+  console.log(
+    `Server started on PORT: ${process.env.PORT} in ${process.env.NODE_ENV} mode.`
+  );
 });
